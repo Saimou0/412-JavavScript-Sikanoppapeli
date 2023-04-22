@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>412 Sikanoppapeli</title>
+</head>
+<body>
+
+
+    <div class="container">
+
+        <!-- Säännöt -->
+        <div class="saannot" id="saannot">
+            <h2>Säännöt yhdellä nopalla</h2>
+            <p>Pelin tarkoitus on kerätä sata pistettä tai enemmän (pistemäärän voi sopia ennen peliä) heittämällä noppaa tai noppia ja laskemalla heittojen summa yhteen.</p>
+            <p>Pelaaja heittää omalla vuorollaan noppaa niin pitkään, kunnes:</p>
+            <ol class="saannotLista">
+                <li>heittää ykkösen</li>
+                <li>päättää lopettaa heittämisen</li>
+            </ol>
+            <p>Jos pelaaja heittää ykkösen, hänen vuoronsa loppuu ja sen kierroksen heittojen summa nollataan. 
+            Vuoro siirtyy seuraavalle pelaajalle. 
+            Jos pelaaja päättää lopettaa heittämisen ennen kuin hän heittää ykkösen, heittojen summa lasketaan yhteen ja lisätään edellisen kierroksen summaan. 
+            Tämän jälkeen vuoro siirtyy seuraavalle pelaajalle.</p>
+            
+            <h2>Esimerkkejä pelitilanteista yhdellä nopalla</h2>
+            <h3>Esimerkki 1:</h3>
+            <p>Ville heittää ensimmäisellä heitollaan kolme ja päättää jatkaa heittämistä. Hän heittää tämän jälkeen vielä 6, 6, 4, 3, 5, 1. 
+            Koska hän heitti ykkösen, Villen vuoro päättyy ja hän ei saa tällä heittovuorollaan yhtään pistettä.</p>
+            <h3>Esimerkki 2:</h3>
+            <p>Mari heittää ensimmäisellä kutosen ja päättää jatkaa heittämistä. Mari heittää vielä silmäluvut 2, 4, 3, 4, ja lopettaa heittämisen. 
+            Koska Mari itse päätti päättää vuoronsa sen sijaan, että vuoro olisi loppunut ykkösen heittämiseen, saa Mari omalla vuorollaan yhteensä 19 pistettä (6+2+4+3+4=19).</p>
+            
+            <h2>Säännöt kahdella nopalla</h2>
+            <p>Sikaa voit pelata kahdella nopalla, jolloin säännöt muuttuvat hieman: 
+            Kun heität tuplat, saat tuplapisteet (esim. kaksi kolmosta on 12 pisteen arvoinen heitto). 
+            Kun heität kaksi ykköstä, saat 25 pistettä. 
+            Kun heität vain toisella nopalla ykkösen, vuoro siirtyy seuraavalle pelaajalle etkä saa pisteitä. 
+            Kun heität kolme tuplaa peräkkäin, vuoro siirtyy seuraavalle pelaajalle etkä saa pisteitä. 
+            Sika ei siis ole tämän monimutkaisempi noppapeli.</p>
+
+            <button type="button" id="luinSaannot">Valmis</button>
+        </div>
+
+        <!-- Noppien määrän asettaminen -->
+        <div class="noppienValitseminen" id="noppienValitseminen" style="display: none;">
+            <button type="button" id="yksiNoppa">Yksi noppa</button>
+            <button type="button" id="kaksiNoppaa">Kaksi noppaa</button>
+        </div>
+        
+        <!-- Pistemäärän valitseminen -->
+        <div class="pisteMaaranValitseminen" id="pisteMaaranValitseminen" style="display: none;">
+            <label for="PisteMaara">Voittamiseen tarvittava pistemäärä (oletus 100)</label> <br>
+            <input type="text" id="Pistemaara">
+            <button type="button" onclick="pistemaaranAsettaminen()">Aseta</button>
+        </div>
+
+        
+        <!-- Pelaajien asettaminen -->
+        <div class="pelaajienAsettaminen" id="pelaajienAsettaminen" style="display: none;">
+            <form name="form" action="">
+                <label for="lisattavaPelaaja">Lisää pelaajia (Min 2):</label>
+                <input type="text" id="lisattavaPelaaja" name="lisattavaPelaaja">
+                <button type="button" onclick="lisaaPelaaja(this.form)">Lisää</button>
+                <button type="button" onclick="aloitaPeli()">Aloita Peli</button>
+            </form>
+            <p id="listaus"></p>
+        </div>
+        
+        <!-- Ilmoitukset -->
+        <p id="NaytaVoittoPistemaara"></p>
+
+        <p id="ilmoitus"></p>
+
+        
+        <!-- Peli -->
+        <div class="voittaminen" id="voittaminen" style="display: none;">
+            <h2 id="voittoIlmoitus"></h2>
+            <p id="pisteLista"></p>
+        </div>
+
+        <div class="Nopat" id="Nopat" style="display: none;">
+            <p id="pisteet"></p> <br>
+            <p id="vuoro"></p>
+            <p id="lisattavatPisteet"></p>
+
+            <!-- Peli yhdellä nopalla -->
+            <div class="noppaKuva" id="noppaKuva" style="display: none;">
+                <img src="" alt="" class="NoppaKuvatYksi"> <br>
+                <button type="button" id="heitaNoppaa">Heitä</button>
+                <button type="button" id="lopetaVuoro1">Lopeta vuoro</button>
+            </div>
+            
+            <!-- Peli kahdella nopalla -->
+            <div class="noppaKuvat" id="noppaKuvat" style="display: none;">
+                <img src="" alt="" class="NoppaKuvatKaksi">
+                <img src="" alt="" class="NoppaKuvatKaksi"> <br>
+                <button type="button" id="heitaNoppia">Heitä</button>
+                <button type="button" id="lopetaVuoro2">Lopeta vuoro</button>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <script src="peliLogiikka.js"></script>
+</body>
+</html>
